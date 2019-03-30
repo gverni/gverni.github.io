@@ -65,6 +65,7 @@
       <h1 class="text-lowercase mb-0">gverni</h1>
       <hr class="star-light">
       <h2 class="font-weight-light mb-0">Open Source Advocate - JavaScript Enthusiast - Web developer</h2>
+      <p class="font-weight-light mt-3">&#123; Contributed to open source projects with <span id="commits">...</span> commits this month &#125;</p>
     </div>
   </header>
 
@@ -157,12 +158,26 @@
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
-  <!-- Contact Form JavaScript -->
-  <script src="js/jqBootstrapValidation.js"></script>
-  <script src="js/contact_me.js"></script>
-
   <!-- Custom scripts for this template -->
   <script src="js/freelancer.min.js"></script>
+  <script>
+
+  window.onload = function() {
+    const today = new Date()
+    const thisMonth = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-01'
+    fetch('https://api.github.com/search/commits?q=author:gverni+committer-date:>' + thisMonth,
+    { headers: {
+        'Accept': 'application/vnd.github.cloak-preview'
+      }
+    }).then(response => response.json())
+    .then(responseJSON => {
+      document.getElementById('commits').innerHTML = responseJSON.total_count
+    })
+  }
+
+
+
+  </script>
 
 </body>
 
