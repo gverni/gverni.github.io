@@ -65,7 +65,7 @@
       <h1 class="text-lowercase mb-0">gverni</h1>
       <hr class="star-light">
       <h2 class="font-weight-light mb-0">Open Source Advocate - JavaScript Enthusiast - Web developer</h2>
-      <p class="font-weight-light mt-3">&#123; Contributed to open source projects with <span id="commits">...</span> commits this month &#125;</p>
+      <p class="font-weight-light mt-3">&#123; Contributed to <span id="stats-repos"></span> open source repos with <span id="stats-commits">...</span> commits <span id="stats-month"></span>&#125;</p>
     </div>
   </header>
 
@@ -164,19 +164,31 @@
 
   window.onload = function() {
     const today = new Date()
-    const thisMonth = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-01'
+    let month = today.getMonth() + 1
+    let statsMonth = 'this month '
+    if (today.getDay() < 5) {
+      statsMonth = 'since last month '
+      month--
+    }
+    const thisMonth = today.getFullYear() + '-' + ('0' + month).slice(-2) + '-01'
     fetch('https://api.github.com/search/commits?q=author:gverni+committer-date:>' + thisMonth,
     { headers: {
         'Accept': 'application/vnd.github.cloak-preview'
       }
     }).then(response => response.json())
     .then(responseJSON => {
-      document.getElementById('commits').innerHTML = responseJSON.total_count
+      document.getElementById('stats-commits').innerHTML = responseJSON.total_count
+      document.getElementById('stats-month').innerHTML = statsMonth
+      // let repos = []
+      // Currently GitHub is retuning the first 30 commits details only
+      // responseJSON.items.forEach(item => {
+      //   console.log('item')
+      //   repo = item.repository.id
+      //   if (repos.indexOf(repo) === -1) { repos.push(repo) }
+      // })
+      // document.getElementById('stats-repos').innerHTML = repos.length
     })
   }
-
-
-
   </script>
 
 </body>
