@@ -166,7 +166,7 @@
     const today = new Date()
     let month = today.getMonth() + 1
     let statsMonth = 'this month '
-    if (today.getDay() < 5) {
+    if (today.getDate() < 5) {
       statsMonth = 'since last month '
       month--
     }
