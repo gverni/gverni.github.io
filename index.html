@@ -1,198 +1,690 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="en" data-theme="dark" id="page-top">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giuseppe Verni — Integration Engineer</title>
+<meta name="description" content="Giuseppe Verni — Technology leader and Integration Engineer at Stripe. 26+ years delivering complex technical initiatives. Open-source contributor.">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter+Tight:wght@400;500;600;700&display=swap");
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+/* ── COLOR TOKENS ───────────────────────────────────────────── */
+:root {
+  --blurple-50:  #eeedff; --blurple-100: #dbd8ff; --blurple-200: #b8b2ff;
+  --blurple-300: #928aff; --blurple-400: #7a71ff; --blurple-500: #635bff;
+  --blurple-600: #4b42e0; --blurple-700: #3a33b3;
+  --status-success: #22c55e; --status-warn: #f59e0b; --status-danger: #ef4444;
+  --accent:       var(--blurple-500);
+  --accent-hover: var(--blurple-400);
+  --accent-press: var(--blurple-700);
+  --accent-soft:  color-mix(in oklch, var(--accent) 18%, transparent);
+  --accent-ring:  color-mix(in oklch, var(--accent) 45%, transparent);
+}
 
-  <title>gverni</title>
+:root, [data-theme="dark"] {
+  color-scheme: dark;
+  --bg-0: #0a0b0d; --bg-1: #101114; --bg-2: #16181d; --bg-3: #1d2027; --bg-4: #262a33;
+  --fg-1: #f1f2f4; --fg-2: #c1c4cb; --fg-3: #8a8f99; --fg-4: #565c66;
+  --line-1: #23262d; --line-2: #2d3139; --line-3: #3a404a;
+  --fg-on-accent: #0a0b0d;
+  --grid-line: rgba(255,255,255,0.035);
+  --shadow-1: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-2: 0 4px 16px rgba(0,0,0,0.45), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-accent-glow: 0 0 0 1px var(--accent-ring), 0 8px 40px color-mix(in oklch,var(--accent) 25%,transparent);
+  --cursor-glow-inner: color-mix(in oklch, var(--accent) 12%, transparent);
+  --cursor-glow-mid:   color-mix(in oklch, var(--accent) 5%,  transparent);
+}
+[data-theme="light"] {
+  color-scheme: light;
+  --bg-0: #fafbfc; --bg-1: #ffffff; --bg-2: #f4f5f7; --bg-3: #eceef2; --bg-4: #e3e6ec;
+  --fg-1: #0d1117; --fg-2: #3a4149; --fg-3: #656d76; --fg-4: #8a919a;
+  --line-1: #e7e9ed; --line-2: #d8dbe1; --line-3: #c2c7cf;
+  --fg-on-accent: #ffffff;
+  --grid-line: rgba(13,17,23,0.04);
+  --shadow-1: 0 1px 2px rgba(13,17,23,0.05);
+  --shadow-2: 0 4px 16px rgba(13,17,23,0.08), 0 1px 2px rgba(13,17,23,0.04);
+  --shadow-accent-glow: 0 0 0 1px var(--accent-ring), 0 8px 40px color-mix(in oklch,var(--accent) 30%,transparent);
+  --cursor-glow-inner: color-mix(in oklch, var(--accent) 14%, transparent);
+  --cursor-glow-mid:   color-mix(in oklch, var(--accent) 6%,  transparent);
+}
 
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+/* ── TYPE TOKENS ─────────────────────────────────────────────── */
+:root {
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-sans:    "Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-mono);
+  --text-xs: 12px; --text-sm: 13px; --text-md: 15px; --text-lg: 17px;
+  --text-xl: 20px; --text-2xl: 26px; --text-3xl: 34px; --text-4xl: 44px;
+  --text-5xl: 60px; --text-6xl: 80px;
+  --lh-tight: 1.05; --lh-snug: 1.25; --lh-normal: 1.5;
+  --tr-tight: -0.02em; --tr-caps: 0.12em; --tr-wide: 0.02em;
+  --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700;
+}
 
-  <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+/* ── SPACING / RADII / MOTION ────────────────────────────────── */
+:root {
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px;
+  --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px; --sp-16: 64px;
+  --sp-20: 80px; --sp-24: 96px;
+  --radius-xs: 3px; --radius-sm: 6px; --radius-md: 10px; --radius-pill: 9999px;
+  --ease-out: cubic-bezier(0.16,1,0.3,1);
+  --dur-fast: 160ms; --dur-base: 240ms; --dur-reveal: 700ms;
+  --container-xl: 1280px;
+  --focus-ring: 0 0 0 3px var(--accent-ring);
+}
 
-  <!-- Plugin CSS -->
-  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+/* ── RESET ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg-0); color: var(--fg-1);
+  font-family: var(--font-sans); font-size: var(--text-md); line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+h1, h2, h3, h4 { margin: 0 0 var(--sp-4); color: var(--fg-1); }
+p  { margin: 0 0 var(--sp-4); color: var(--fg-2); }
+a  { color: var(--accent); text-decoration: none; transition: color var(--dur-fast) var(--ease-out); }
+a:hover { color: var(--accent-hover); }
+::selection { background: color-mix(in oklch, var(--accent) 35%, transparent); color: var(--fg-1); }
+* { scrollbar-width: thin; scrollbar-color: var(--line-3) transparent; }
+*::-webkit-scrollbar { width: 10px; }
+*::-webkit-scrollbar-thumb { background: var(--line-3); border-radius: 999px; }
 
-  <!-- Custom styles for this template -->
-  <link href="css/freelancer.min.css" rel="stylesheet">
+/* ── BG GRID ─────────────────────────────────────────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px; background-position: -1px -1px;
+}
+.bg-grid-fine {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
 
-  <style>
-  .brand-image {
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-  }
-  </style>
+/* ── BUTTONS ─────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  font-family: var(--font-mono); font-weight: var(--fw-medium); font-size: var(--text-sm);
+  padding: 10px 16px; border-radius: var(--radius-sm); border: 1px solid transparent;
+  background: transparent; color: var(--fg-1); cursor: pointer; white-space: nowrap;
+  user-select: none; text-decoration: none;
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--accent); color: var(--fg-on-accent); border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--fg-on-accent); }
+.btn-outline { border-color: var(--line-2); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btn-sm { padding: 6px 10px; font-size: var(--text-xs); }
+
+/* ── BADGES ──────────────────────────────────────────────────── */
+.badge-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.badge-dot--pulse { animation: pulse 2s var(--ease-out) infinite; }
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 color-mix(in oklch, currentColor 50%, transparent); }
+  70%  { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+/* ── CURSOR GLOW & TRAIL ─────────────────────────────────────── */
+.cursor-glow {
+  position: fixed; top: 0; left: 0; width: 350px; height: 350px; border-radius: 50%;
+  background: radial-gradient(circle, var(--cursor-glow-inner) 0%, var(--cursor-glow-mid) 30%, transparent 65%);
+  pointer-events: none; z-index: 9998; mix-blend-mode: screen; will-change: transform;
+}
+[data-theme="light"] .cursor-glow { mix-blend-mode: multiply; }
+.cursor-trail-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9997; }
+@media (hover: none) { .cursor-glow, .cursor-trail-canvas { display: none; } }
+
+/* ── SCROLL REVEALS ──────────────────────────────────────────── */
+.js-reveal-arm .reveal:not(.revealed) {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
+  will-change: opacity, transform;
+}
+.reveal.revealed {
+  opacity: 1; transform: translateY(0);
+  transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
+}
+.js-reveal-arm .reveal-stagger > .reveal:nth-child(1) { transition-delay: 0s;    }
+.js-reveal-arm .reveal-stagger > .reveal:nth-child(2) { transition-delay: 60ms;  }
+.js-reveal-arm .reveal-stagger > .reveal:nth-child(3) { transition-delay: 120ms; }
+.js-reveal-arm .reveal-stagger > .reveal:nth-child(4) { transition-delay: 180ms; }
+.js-reveal-arm .reveal-stagger > .reveal:nth-child(5) { transition-delay: 240ms; }
+.js-reveal-arm .reveal-stagger > .reveal:nth-child(6) { transition-delay: 300ms; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; transition: none !important; } }
+
+/* ── PORTFOLIO LAYOUT ────────────────────────────────────────── */
+.pf-shell { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* Nav */
+.pf-nav {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in oklch, var(--bg-0) 82%, transparent);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid var(--line-1);
+}
+.pf-nav__inner {
+  max-width: var(--container-xl); margin: 0 auto;
+  padding: var(--sp-4) var(--sp-6);
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--sp-6);
+}
+.pf-nav__logo {
+  font-family: var(--font-mono); font-weight: var(--fw-bold); font-size: var(--text-md);
+  color: var(--fg-1); letter-spacing: -0.01em;
+  display: inline-flex; align-items: center; gap: var(--sp-2); text-decoration: none;
+}
+.pf-nav__logo:hover { color: var(--fg-1); }
+.pf-nav__logo-dot {
+  width: 8px; height: 8px; border-radius: 2px;
+  background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); flex-shrink: 0;
+}
+.pf-nav__links { display: flex; justify-content: center; gap: var(--sp-6); }
+.pf-nav__link {
+  font-family: var(--font-mono); font-size: var(--text-sm); color: var(--fg-3);
+  text-decoration: none; padding: 4px 2px; transition: color var(--dur-fast) var(--ease-out);
+}
+.pf-nav__link:hover { color: var(--fg-1); }
+.pf-nav__actions { display: inline-flex; gap: var(--sp-2); align-items: center; justify-content: flex-end; }
+.pf-theme-toggle {
+  background: transparent; border: 1px solid var(--line-1); border-radius: var(--radius-sm);
+  color: var(--fg-2); width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: border-color var(--dur-fast), color var(--dur-fast);
+}
+.pf-theme-toggle:hover { border-color: var(--line-2); color: var(--fg-1); }
+
+/* Hero */
+.pf-hero {
+  max-width: var(--container-xl); width: 100%; margin: 0 auto;
+  padding: clamp(64px, 10vw, 140px) var(--sp-6) clamp(64px, 9vw, 120px);
+  position: relative;
+}
+.pf-hero__status {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  letter-spacing: var(--tr-caps); text-transform: uppercase; color: var(--fg-3);
+  padding: 6px 10px; border: 1px solid var(--line-1); border-radius: var(--radius-pill);
+  background: var(--bg-1); margin-bottom: var(--sp-8);
+}
+.pf-hero__title {
+  font-family: var(--font-mono); font-weight: var(--fw-bold);
+  font-size: clamp(40px, 7.2vw, 96px); line-height: 1.02;
+  letter-spacing: -0.035em; color: var(--fg-1); margin: 0 0 var(--sp-8);
+}
+.pf-hero__title em {
+  font-style: italic; color: var(--accent);
+  font-family: var(--font-sans); font-weight: var(--fw-semibold); letter-spacing: -0.02em;
+}
+.pf-hero__sub {
+  font-family: var(--font-sans); font-size: var(--text-xl); line-height: var(--lh-normal);
+  color: var(--fg-2); max-width: 56ch; margin: 0 0 var(--sp-8);
+}
+.pf-hero__meta {
+  display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-8);
+  font-family: var(--font-mono); font-size: var(--text-sm); color: var(--fg-3);
+}
+.pf-hero__meta b { color: var(--fg-1); font-weight: var(--fw-medium); }
+
+/* Sections */
+.pf-section {
+  max-width: var(--container-xl); width: 100%; margin: 0 auto;
+  padding: var(--sp-20) var(--sp-6); border-top: 1px solid var(--line-1);
+}
+.pf-section__header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: var(--sp-6); margin-bottom: var(--sp-12); flex-wrap: wrap;
+}
+.pf-section__title {
+  font-family: var(--font-mono); font-weight: var(--fw-bold);
+  font-size: clamp(28px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.025em;
+  color: var(--fg-1); margin: 0; display: flex; flex-direction: column; gap: var(--sp-2);
+}
+.pf-section__title small {
+  font-size: var(--text-xs); font-weight: var(--fw-medium);
+  letter-spacing: var(--tr-caps); text-transform: uppercase; color: var(--accent);
+}
+
+/* Projects grid */
+.pf-projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-4); }
+.pf-project {
+  background: var(--bg-1); border: 1px solid var(--line-1); border-radius: var(--radius-md);
+  padding: var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-4);
+  color: inherit; text-decoration: none;
+  transition: border-color 180ms var(--ease-out), transform 180ms var(--ease-out), background 180ms var(--ease-out);
+}
+.pf-project:hover { border-color: var(--accent-ring); background: var(--bg-2); transform: translateY(-2px); color: inherit; }
+.pf-project__idx {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  letter-spacing: var(--tr-caps); color: var(--fg-3);
+}
+.pf-project:hover .pf-project__idx { color: var(--accent); }
+.pf-project__title {
+  font-family: var(--font-mono); font-weight: var(--fw-bold); font-size: var(--text-2xl);
+  letter-spacing: -0.02em; color: var(--fg-1); margin: 0;
+}
+.pf-project__desc {
+  font-family: var(--font-sans); font-size: var(--text-md); line-height: var(--lh-normal);
+  color: var(--fg-2); margin: 0; flex: 1;
+}
+.pf-project__stats {
+  font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-3);
+  display: flex; gap: var(--sp-4); flex-wrap: wrap;
+}
+.pf-project__stack { display: flex; flex-wrap: wrap; gap: 6px; }
+.pf-stack-tag {
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-3);
+  background: var(--bg-2); border: 1px solid var(--line-1);
+  border-radius: var(--radius-xs); padding: 3px 8px;
+}
+
+/* Timeline */
+.pf-timeline { display: flex; flex-direction: column; }
+.pf-timeline__row {
+  display: grid; grid-template-columns: 140px 1fr; gap: var(--sp-8);
+  padding: var(--sp-6) 0; border-top: 1px dashed var(--line-1);
+}
+.pf-timeline__row:last-child { border-bottom: 1px dashed var(--line-1); }
+.pf-timeline__date {
+  font-family: var(--font-mono); font-size: var(--text-sm);
+  color: var(--fg-3); letter-spacing: var(--tr-caps); padding-top: 2px;
+}
+.pf-timeline__role {
+  font-family: var(--font-mono); font-weight: var(--fw-bold); font-size: var(--text-lg);
+  color: var(--fg-1); letter-spacing: -0.01em;
+}
+.pf-timeline__org { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--accent); margin-top: 2px; }
+.pf-timeline__desc {
+  font-family: var(--font-sans); font-size: var(--text-md); line-height: var(--lh-normal);
+  color: var(--fg-2); margin-top: var(--sp-2); max-width: 60ch;
+}
+.pf-timeline__bullets { margin: var(--sp-3) 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--sp-1); }
+.pf-timeline__bullets li {
+  font-family: var(--font-sans); font-size: var(--text-sm); color: var(--fg-3);
+  line-height: var(--lh-normal); padding-left: var(--sp-5); position: relative;
+}
+.pf-timeline__bullets li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-size: 11px; top: 3px; font-family: var(--font-mono); }
+
+/* Contact */
+.pf-contact-links { display: flex; gap: var(--sp-4); flex-wrap: wrap; align-items: center; }
+
+/* Footer */
+.pf-footer {
+  margin-top: auto; max-width: var(--container-xl); width: 100%;
+  margin-left: auto; margin-right: auto;
+  padding: var(--sp-8) var(--sp-6); border-top: 1px solid var(--line-1);
+  display: flex; justify-content: space-between; align-items: center;
+  gap: var(--sp-6); font-family: var(--font-mono); font-size: var(--text-xs);
+  color: var(--fg-3); flex-wrap: wrap;
+}
+.pf-footer__links { display: flex; gap: var(--sp-6); }
+.pf-footer__link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--fg-3); text-decoration: none; transition: color var(--dur-fast);
+}
+.pf-footer__link:hover { color: var(--fg-1); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .pf-nav__inner    { grid-template-columns: auto auto; gap: var(--sp-3); }
+  .pf-nav__links    { grid-column: 1 / -1; order: 3; justify-content: flex-start; flex-wrap: wrap; gap: var(--sp-4); padding-top: var(--sp-2); border-top: 1px dashed var(--line-1); }
+  .pf-projects      { grid-template-columns: 1fr; }
+  .pf-timeline__row { grid-template-columns: 1fr; gap: var(--sp-2); }
+  .pf-section       { padding: var(--sp-16) var(--sp-6); }
+  .pf-hero__title   { font-size: clamp(36px, 10vw, 70px); }
+}
+</style>
 </head>
+<body class="bg-grid">
+<div class="pf-shell">
 
-<body id="page-top">
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger text-lowercase" href="#page-top">gverni</a>
-      <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Projects</a>
-          </li>
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#extensions">Chrome Extensions</a>
-          </li>
-          <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#misc">Misc</a>
-            </li>
-        </ul>
+  <!-- ── NAV ──────────────────────────────────────────────────── -->
+  <nav class="pf-nav">
+    <div class="pf-nav__inner">
+      <a class="pf-nav__logo" href="#page-top">
+        <span class="pf-nav__logo-dot"></span>
+        GV<span style="color:var(--fg-3);font-weight:400">/verni</span>
+      </a>
+      <div class="pf-nav__links">
+        <a class="pf-nav__link" href="#experience">experience</a>
+        <a class="pf-nav__link" href="#projects">projects</a>
+        <a class="pf-nav__link" href="#contact">contact</a>
+      </div>
+      <div class="pf-nav__actions">
+        <button class="pf-theme-toggle" id="theme-toggle" aria-label="toggle theme">
+          <svg id="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-14.07 1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg id="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+        </button>
+        <a class="btn btn-outline btn-sm" href="https://www.linkedin.com/in/gverni/" target="_blank" rel="noopener noreferrer">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin ↗
+        </a>
       </div>
     </div>
   </nav>
 
-  <!-- Header -->
-  <header class="masthead bg-primary text-white text-center">
-    <div class="container">
-      <img class="img-fluid mb-5 d-block mx-auto brand-image" style="border-radius: 10px;" src="images/me.jpg" alt="" width="20%">
-      <h1 class="text-lowercase mb-0">gverni</h1>
-      <hr class="star-light">
-      <h2 class="font-weight-light mb-0">Open Source Advocate - JavaScript Enthusiast - Web developer</h2>
-      <p class="font-weight-light mt-3">&#123; Contributed to <span id="stats-repos"></span> open source repos with <span id="stats-commits">...</span> commits <span id="stats-month"></span>&#125;</p>
-    </div>
-  </header>
-
-  <!-- Portfolio Grid Section -->
-  <section id="portfolio">
-    <div class="container">
-      <h2 class="text-center text-uppercase text-secondary mb-0">Projects</h2>
-      <hr class="star-dark mb-5">
-      <h3 class="text-center text-uppercase text-secondary mb-0"><a href="https://sweetalert2.github.io/">SweetAlert2</a></h3>
-      <p class="text-center text-secondary mb-5">A beautiful, responsive, highly customizable and accessible (WAI-ARIA) replacement for JavaScript's popup boxes. Zero dependencies.</p>
-      <h3 class="text-center text-uppercase text-secondary mb-0"><a href="https://gverni.github.io/kairoi/">kairoi</a></h3>
-      <p class="text-center text-secondary mb-5">Timelines made easy. A D3 project</p>
-      <h3 class="text-center text-uppercase text-secondary mb-0"><a href="https://github.com/gverni/frontend-project-boilerplate">Front-End project boilerplate</a></h3>
-      <p class="text-center text-secondary mb-5">A minimal dependencies boilerplate for front-end projects</p>
-      <h3 class="text-center text-uppercase text-secondary mb-0"><a href="https://github.com/gverni/ChromeExtensionsBoilerplates">Chrome Extensions boilerplates</a></h3>
-      <p class="text-center text-secondary mb-5">Boilerplates for Chrome Extensions development</p>
-      <h3 class="text-center text-uppercase text-secondary mb-0"><a href="https://github.com/gverni/validate-slack-request">validate-slack-request</a></h3>
-      <p class="text-center text-secondary mb-5">An <a href="https://www.npmjs.com/package/validate-slack-request">npm module</a> to validate Slack webhook requests</p>
-    </div>
-  </section>
-
-  <!-- Extensions Section -->
-  <section class="bg-primary text-white mb-0" id="extensions">
-    <div class="container">
-      <h2 class="text-center text-uppercase text-white">Chrome Extensions</h2>
-      <hr class="star-light mb-5">
-      <h3 class="text-center text-uppercase mb-0"><a class="text-white" href="https://chrome.google.com/webstore/detail/smartforce/anoofiphaagpcabckleboeellebpeika">Smartforce</a></h3>
-      <p class="text-center mb-5">Alternative front end for Salesforce Service Cloud</p>
-      <h3 class="text-center text-uppercase  mb-0"><a class="text-white" href="https://chrome.google.com/webstore/detail/vivacity/apeabapiefiblnhhgdhjbeagchoggfpd">Vivacity</a></h3>
-      <p class="text-center mb-5">Check your vitality points (no longer maintained)</p>
-      <h3 class="text-center text-uppercase text-secondary mb-0"><a class="text-white" href="https://chrome.google.com/webstore/detail/selectpath/njpgdmhmplongjkbidclifbnopjehnfb">Select Path</a></h3>
-      <p class="text-center mb-5">Mini extension to select and copy network paths in web pages</p>
-  </section>
-
-  <!-- Misc Section -->
-  <section id="misc">
-      <div class="container">
-        <h2 class="text-center text-uppercase text-secondary mb-0">Misc</h2>
-        <hr class="star-dark mb-5">
-        <h3 class="text-center text-uppercase text-secondary mb-0"><a href="https://www.oreilly.com/library/view/d3-for-the/9781492046783/">D3 for the Impatient</a></h3>
-        <p class="text-center text-secondary mb-5">Earned a mention in the acknowledgment section of this awsome book (buyt it on <a href="https://www.amazon.com/_/dp/1492046779?tag=oreilly20-20" style="color: #15a4de;">Amazon US</a> or <a href="https://www.amazon.co.uk/D3-js-Impatient-Philipp-K-Janert/dp/1492046779/" style="color: #15a4de;">Amazon UK</a>) </p>
-        <h3 class="text-center text-uppercase text-secondary mb-0"><a href="https://timetoeatngo.com/">Time to eat 'ngo</a></h3>
-        <p class="text-center text-secondary mb-5">Website designer and maintainer</p>
-        <h3 class="text-center text-uppercase text-secondary mb-0"><a href="https://medium.com/front-end-weekly/es6-modules-in-chrome-extensions-an-introduction-313b3fce955b">ES6 modules in chrome extensions — An introduction</a></h3>
-        <p class="text-center text-secondary mb-5">A Medium article</p>
+  <!-- ── HERO ─────────────────────────────────────────────────── -->
+  <section class="pf-hero">
+    <div class="reveal">
+      <div class="pf-hero__status">
+        <span class="badge-dot badge-dot--pulse" style="color:var(--status-success)"></span>
+        integration engineer · stripe · emea
       </div>
-    </section>
-
-    <footer class="footer text-center">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 mb-5 mb-lg-0">
-            </div>
-            <div class="col-md-4 mb-5 mb-lg-0">
-              <ul class="list-inline mb-0">
-                <li class="list-inline-item">
-                  <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.linkedin.com/in/gverni/">
-                    <i class="fab fa-fw fa-linkedin-in"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://github.com/gverni/">
-                      <i class="fab fa-fw fa-github"></i>
-                    </a>
-                </li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-            </div>
-          </div>
-        </div>
-      </footer>
-
-  <div class="copyright py-4 text-center text-white">
-    <div class="container">
-      <small>Copyright &copy; gverni 2019</small>
     </div>
-  </div>
+    <h1 class="pf-hero__title reveal">
+      Giuseppe Verni.<br>
+      <em>building bridges</em><br>
+      between systems.
+    </h1>
+    <p class="pf-hero__sub reveal">
+      I deliver complex technical initiatives. 26+ years of engineering, leadership, and open-source work across payments, telecoms, and developer tooling.
+    </p>
+    <div class="pf-hero__meta reveal">
+      <span>// <b>guildford, uk</b></span>
+      <span>// <a href="#projects" style="color:var(--fg-1);font-weight:500">open source enthusiast</a></span>
+    </div>
+  </section>
 
-  <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-  <div class="scroll-to-top d-lg-none position-fixed ">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
-      <i class="fa fa-chevron-up"></i>
-    </a>
-  </div>
+  <!-- ── EXPERIENCE ───────────────────────────────────────────── -->
+  <section class="pf-section" id="experience">
+    <div class="pf-section__header">
+      <h2 class="pf-section__title reveal">
+        <small>// experience</small>
+        where I've been.
+      </h2>
+    </div>
+    <div class="pf-timeline reveal-stagger">
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <div class="pf-timeline__row reveal">
+        <div class="pf-timeline__date">2021 → now</div>
+        <div>
+          <div class="pf-timeline__role">Integration Engineer, Professional Services</div>
+          <div class="pf-timeline__org">@ Stripe · London</div>
+          <p class="pf-timeline__desc">Principal-level IE owning end-to-end technical delivery for enterprise and strategic accounts across UK and EMEA. Bridging solution architecture, API integration, and business outcomes across complex, multi-workstream engagements.</p>
+          <ul class="pf-timeline__bullets">
+            <li>Led Currys × Stripe Terminal rollout across ~300 UK &amp; Ireland stores — world-first Pennies integration on Stripe terminals globally.</li>
+            <li>Delivered enterprise integrations for Tesco and River Island as primary technical owner.</li>
+            <li>Contributed to a reusable Unified Commerce reference architecture now adopted globally by PS teams.</li>
+            <li>Internal AI Champion: drove GenAI and LLM tooling adoption across Stripe Professional Services worldwide.</li>
+            <li>Built internal Next.js prototypes and proof-of-concepts deployed on Vercel.</li>
+          </ul>
+        </div>
+      </div>
 
-  <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+      <div class="pf-timeline__row reveal">
+        <div class="pf-timeline__date">2019 → 2021</div>
+        <div>
+          <div class="pf-timeline__role">Principal Solutions Engineer</div>
+          <div class="pf-timeline__org">@ Twilio · London</div>
+          <p class="pf-timeline__desc">Sole SE on the Growth Strat team. Consistently exceeded targets across multiple quarters.</p>
+          <ul class="pf-timeline__bullets">
+            <li>Secured major Twilio Flex wins: Moneypenny, CarFinance247.</li>
+            <li>Built SmartMonkey — adopted by 500+ Account Executives worldwide.</li>
+            <li>Authored sms-segments-calculator, now at 80K+ weekly npm downloads.</li>
+            <li>Led plugin-queued-callbacks-and-voicemail for Twilio Flex (twilio-labs).</li>
+          </ul>
+        </div>
+      </div>
 
-  <!-- Custom scripts for this template -->
-  <script src="js/freelancer.min.js"></script>
-  <script>
+      <div class="pf-timeline__row reveal">
+        <div class="pf-timeline__date">2009 → 2019</div>
+        <div>
+          <div class="pf-timeline__role">Principal Engineer / Manager, Customer Engineering</div>
+          <div class="pf-timeline__org">@ Qualcomm UK · Farnborough</div>
+          <p class="pf-timeline__desc">Led and mentored a team of 14 Customer Engineers delivering hardware/software integration support for EMEA IoT clients.</p>
+          <ul class="pf-timeline__bullets">
+            <li>15% reduction in customer-reported issues through process optimisation.</li>
+            <li>Technical lead for major French ISP set-top box launch — resolved critical performance bottlenecks.</li>
+          </ul>
+        </div>
+      </div>
 
-  window.onload = function() {
-    const today = new Date()
-    let month = today.getMonth() + 1
-    let statsMonth = 'this month '
-    if (today.getDate() < 5) {
-      statsMonth = 'since last month '
-      month--
-    }
-    const thisMonth = today.getFullYear() + '-' + ('0' + month).slice(-2) + '-01'
-    fetch('https://api.github.com/search/commits?q=author:gverni+committer-date:>' + thisMonth,
-    { headers: {
-        'Accept': 'application/vnd.github.cloak-preview'
-      }
-    }).then(response => response.json())
-    .then(responseJSON => {
-      document.getElementById('stats-commits').innerHTML = responseJSON.total_count
-      document.getElementById('stats-month').innerHTML = statsMonth
-      // let repos = []
-      // Currently GitHub is retuning the first 30 commits details only
-      // responseJSON.items.forEach(item => {
-      //   console.log('item')
-      //   repo = item.repository.id
-      //   if (repos.indexOf(repo) === -1) { repos.push(repo) }
-      // })
-      // document.getElementById('stats-repos').innerHTML = repos.length
-    })
+      <div class="pf-timeline__row reveal">
+        <div class="pf-timeline__date">2006 → 2009</div>
+        <div>
+          <div class="pf-timeline__role">Head of Customer Engineering, Italy</div>
+          <div class="pf-timeline__org">@ Qualcomm Italia · Rome</div>
+          <p class="pf-timeline__desc">Managed 4 engineering teams (15 engineers) providing integration support across Southern Europe. Defined local support strategies aligned with EU leadership.</p>
+        </div>
+      </div>
+
+      <div class="pf-timeline__row reveal">
+        <div class="pf-timeline__date">1998 → 2006</div>
+        <div>
+          <div class="pf-timeline__role">Early career</div>
+          <div class="pf-timeline__org">@ Easy Electronics (acq. Qualcomm) · Abaton.it (co-founder)</div>
+          <p class="pf-timeline__desc">Key engineer at Easy Electronics; advised H3G (Italy's first 3G carrier) on mobile phone technical compliance. Co-founded Abaton.it — led development of distributed web applications and data warehouse solutions.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── OPEN SOURCE PROJECTS ──────────────────────────────────── -->
+  <section class="pf-section" id="projects">
+    <div class="pf-section__header">
+      <h2 class="pf-section__title reveal">
+        <small>// open source</small>
+        selected projects.
+      </h2>
+      <a class="pf-nav__link reveal" href="https://github.com/gverni" target="_blank" rel="noopener">github ↗</a>
+    </div>
+    <div class="pf-projects reveal-stagger">
+
+      <a class="pf-project reveal" href="https://sweetalert2.github.io/" target="_blank" rel="noopener">
+        <div class="pf-project__idx">
+          <span>// [01]</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </div>
+        <h3 class="pf-project__title">sweetalert2</h3>
+        <p class="pf-project__desc">#4 human contributor. Beautiful, accessible JavaScript popup library. Zero dependencies.</p>
+        <div class="pf-project__stats">
+          <span>18.1k ★</span>
+          <span>3.85M monthly npm downloads</span>
+        </div>
+        <div class="pf-project__stack">
+          <span class="pf-stack-tag">JavaScript</span>
+          <span class="pf-stack-tag">SCSS</span>
+        </div>
+      </a>
+
+      <a class="pf-project reveal" href="https://github.com/TwilioDevEd/message-segment-calculator" target="_blank" rel="noopener">
+        <div class="pf-project__idx">
+          <span>// [02]</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </div>
+        <h3 class="pf-project__title">sms-segments-calculator</h3>
+        <p class="pf-project__desc">SMS segment calculator. Author and maintainer. Used globally across Twilio integrations.</p>
+        <div class="pf-project__stats">
+          <span>80K+ weekly npm downloads</span>
+        </div>
+        <div class="pf-project__stack">
+          <span class="pf-stack-tag">JavaScript</span>
+          <span class="pf-stack-tag">npm</span>
+        </div>
+      </a>
+
+      <a class="pf-project reveal" href="https://chromewebstore.google.com/detail/smartmonkey/efjcodlekonpfkdkcpbahonepphhmoek" target="_blank" rel="noopener">
+        <div class="pf-project__idx">
+          <span>// [03]</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </div>
+        <h3 class="pf-project__title">SmartMonkey</h3>
+        <p class="pf-project__desc">Chrome extension surfacing cross-sell and upsell signals from Twilio customer usage data.</p>
+        <div class="pf-project__stats">
+          <span>500+ AEs worldwide</span>
+        </div>
+        <div class="pf-project__stack">
+          <span class="pf-stack-tag">Chrome Extension</span>
+          <span class="pf-stack-tag">JavaScript</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── CONTACT ───────────────────────────────────────────────── -->
+  <section class="pf-section" id="contact">
+    <div class="pf-section__header">
+      <h2 class="pf-section__title reveal">
+        <small>// contact</small>
+        get in touch.
+      </h2>
+    </div>
+    <div class="pf-contact-links reveal">
+      <a class="btn btn-primary" href="https://www.linkedin.com/in/gverni/" target="_blank" rel="noopener noreferrer">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/gverni ↗
+      </a>
+      <a class="btn btn-outline" href="https://github.com/gverni" target="_blank" rel="noopener noreferrer">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/></svg>
+        github.com/gverni ↗
+      </a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────────────── -->
+  <footer class="pf-footer">
+    <div>// © 2026 Giuseppe Verni</div>
+    <div class="pf-footer__links">
+      <a class="pf-footer__link" href="https://github.com/gverni" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/></svg>
+        github
+      </a>
+      <a class="pf-footer__link" href="https://www.linkedin.com/in/gverni/" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin
+      </a>
+    </div>
+  </footer>
+
+</div><!-- /.pf-shell -->
+
+<script>
+/* ── CURSOR GLOW + TRAIL + REVEALS ──────────────────────────── */
+(() => {
+  const noMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  const hasHover = window.matchMedia?.("(hover: hover)").matches;
+
+  function initGlow() {
+    if (!hasHover) return;
+    const g = document.createElement("div");
+    g.className = "cursor-glow"; g.setAttribute("aria-hidden","true");
+    document.body.appendChild(g);
+    let tx = innerWidth/2, ty = innerHeight/2, cx = tx, cy = ty;
+    window.addEventListener("pointermove", e => { tx = e.clientX; ty = e.clientY; }, {passive:true});
+    if (!noMotion) (function frame() {
+      cx += (tx-cx)*0.18; cy += (ty-cy)*0.18;
+      g.style.transform = `translate(${cx-175}px,${cy-175}px)`;
+      requestAnimationFrame(frame);
+    })();
   }
-  </script>
 
+  function initTrail() {
+    if (!hasHover || noMotion) return;
+    const cv = document.createElement("canvas");
+    cv.className = "cursor-trail-canvas"; cv.setAttribute("aria-hidden","true");
+    document.body.appendChild(cv);
+    const ctx = cv.getContext("2d");
+    const DPR = Math.min(devicePixelRatio||1, 2);
+    function resize() {
+      cv.width = innerWidth*DPR; cv.height = innerHeight*DPR;
+      cv.style.width = innerWidth+"px"; cv.style.height = innerHeight+"px";
+      ctx.scale(DPR,DPR);
+    }
+    resize();
+    window.addEventListener("resize", () => { ctx.setTransform(1,0,0,1,0,0); resize(); });
+    const pts = [];
+    window.addEventListener("pointermove", e => {
+      pts.push({x:e.clientX,y:e.clientY,t:performance.now()});
+      if (pts.length > 26) pts.shift();
+    }, {passive:true});
+    const accent = () => getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#635bff";
+    let col = accent();
+    new MutationObserver(()=>{ col=accent(); }).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+    function rgb(s) {
+      if (s.startsWith("#")) { const h=s.slice(1),f=h.length===3?h.split("").map(c=>c+c).join(""):h,n=parseInt(f,16); return [(n>>16)&255,(n>>8)&255,n&255]; }
+      const m=s.match(/\d+/g); return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[99,91,255];
+    }
+    (function render() {
+      const now = performance.now();
+      ctx.clearRect(0,0,cv.width,cv.height);
+      const [r,g,b] = rgb(col);
+      while (pts.length && now-pts[0].t>500) pts.shift();
+      for (let i=1;i<pts.length;i++) {
+        const p0=pts[i-1],p1=pts[i],a=Math.max(0,1-(now-p1.t)/500),w=Math.max(0.5,2.2*a);
+        ctx.beginPath(); ctx.moveTo(p0.x,p0.y); ctx.lineTo(p1.x,p1.y);
+        ctx.strokeStyle=`rgba(${r},${g},${b},${a*0.65})`; ctx.lineWidth=w; ctx.lineCap="round"; ctx.stroke();
+      }
+      if (pts.length) { const h=pts[pts.length-1]; ctx.beginPath(); ctx.arc(h.x,h.y,3,0,Math.PI*2); ctx.fillStyle=`rgba(${r},${g},${b},0.55)`; ctx.fill(); }
+      requestAnimationFrame(render);
+    })();
+  }
+
+  function initReveals() {
+    if (!("IntersectionObserver" in window) || noMotion) return;
+    document.documentElement.classList.add("js-reveal-arm");
+    const seen = new WeakSet();
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("revealed"); io.unobserve(e.target); } });
+    }, {rootMargin:"0px 0px -10% 0px", threshold:0.08});
+    function obs(el) {
+      if (seen.has(el)) return; seen.add(el); io.observe(el);
+      setTimeout(() => {
+        if (!el.classList.contains("revealed")) {
+          const r=el.getBoundingClientRect();
+          if (r.top<innerHeight&&r.bottom>0) { el.classList.add("revealed"); io.unobserve(el); }
+        }
+      }, 1200);
+    }
+    document.querySelectorAll(".reveal").forEach(obs);
+    new MutationObserver(recs => {
+      for (const r of recs) r.addedNodes.forEach(n => {
+        if (n.nodeType!==1) return;
+        if (n.classList?.contains("reveal")) obs(n);
+        n.querySelectorAll?.(".reveal").forEach(obs);
+      });
+    }).observe(document.body,{childList:true,subtree:true});
+    const sweep = () => document.querySelectorAll(".reveal:not(.revealed)").forEach(el => {
+      const r=el.getBoundingClientRect();
+      if (r.top<innerHeight*1.1&&r.bottom>-20) { el.classList.add("revealed"); io.unobserve(el); }
+    });
+    setTimeout(sweep,400); setTimeout(sweep,1200);
+  }
+
+  function init() { initReveals(); initGlow(); initTrail(); }
+  document.readyState==="loading" ? document.addEventListener("DOMContentLoaded",init) : init();
+})();
+
+/* ── THEME TOGGLE ────────────────────────────────────────────── */
+(function() {
+  const btn  = document.getElementById("theme-toggle");
+  const sun  = document.getElementById("icon-sun");
+  const moon = document.getElementById("icon-moon");
+  let t = localStorage.getItem("gv-theme") || "dark";
+  function apply(theme) {
+    document.documentElement.dataset.theme = theme;
+    sun.style.display  = theme==="dark" ? "block" : "none";
+    moon.style.display = theme==="dark" ? "none"  : "block";
+    localStorage.setItem("gv-theme", theme);
+  }
+  apply(t);
+  btn.addEventListener("click", () => { t = t==="dark" ? "light" : "dark"; apply(t); });
+})();
+
+/* ── SMOOTH SCROLL ───────────────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener("click", e => {
+    const target = document.querySelector(a.getAttribute("href"));
+    if (target) { e.preventDefault(); target.scrollIntoView({behavior:"smooth",block:"start"}); }
+  });
+});
+</script>
 </body>
-
 </html>
