@@ -260,11 +260,10 @@ a:hover { color: var(--accent-hover); }
 }
 .pf-project:hover { border-color: var(--accent-ring); background: var(--bg-2); transform: translateY(-2px); color: inherit; }
 .pf-project__idx {
-  display: flex; align-items: center; justify-content: space-between;
-  font-family: var(--font-mono); font-size: var(--text-xs);
-  letter-spacing: var(--tr-caps); color: var(--fg-3);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: var(--sp-3);
 }
-.pf-project:hover .pf-project__idx { color: var(--accent); }
+.pf-project__idx svg { flex-shrink: 0; margin-top: 4px; color: var(--fg-4); transition: color var(--dur-fast) var(--ease-out); }
+.pf-project:hover .pf-project__idx svg { color: var(--accent); }
 .pf-project__title {
   font-family: var(--font-mono); font-weight: var(--fw-bold); font-size: var(--text-2xl);
   letter-spacing: -0.02em; color: var(--fg-1); margin: 0;
@@ -478,12 +477,23 @@ a:hover { color: var(--accent-hover); }
     </div>
     <div class="pf-projects reveal-stagger">
 
-      <a class="pf-project reveal" href="https://sweetalert2.github.io/" target="_blank" rel="noopener">
+      <a class="pf-project reveal" href="https://github.com/gverni/clocktopus" target="_blank" rel="noopener">
         <div class="pf-project__idx">
-          <span>// [01]</span>
+          <h3 class="pf-project__title">⏰🐙 clocktopus</h3>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
         </div>
-        <h3 class="pf-project__title">sweetalert2</h3>
+        <p class="pf-project__desc">A lightweight, conversational task and time tracker that runs inside an LLM coding agent. Zero dependencies, natural language interface.</p>
+        <div class="pf-project__stack">
+          <span class="pf-stack-tag">Claude Code</span>
+          <span class="pf-stack-tag">AI</span>
+        </div>
+      </a>
+
+      <a class="pf-project reveal" href="https://sweetalert2.github.io/" target="_blank" rel="noopener">
+        <div class="pf-project__idx">
+          <h3 class="pf-project__title">sweetalert2</h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </div>
         <p class="pf-project__desc">#4 human contributor. Beautiful, accessible JavaScript popup library. Zero dependencies.</p>
         <div class="pf-project__stats">
           <span>18.1k ★</span>
@@ -497,10 +507,9 @@ a:hover { color: var(--accent-hover); }
 
       <a class="pf-project reveal" href="https://github.com/TwilioDevEd/message-segment-calculator" target="_blank" rel="noopener">
         <div class="pf-project__idx">
-          <span>// [02]</span>
+          <h3 class="pf-project__title">sms-segments-calculator</h3>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
         </div>
-        <h3 class="pf-project__title">sms-segments-calculator</h3>
         <p class="pf-project__desc">SMS segment calculator. Author and maintainer. Used globally across Twilio integrations.</p>
         <div class="pf-project__stats">
           <span>80K+ weekly npm downloads</span>
@@ -513,10 +522,9 @@ a:hover { color: var(--accent-hover); }
 
       <a class="pf-project reveal" href="https://chromewebstore.google.com/detail/smartmonkey/efjcodlekonpfkdkcpbahonepphhmoek" target="_blank" rel="noopener">
         <div class="pf-project__idx">
-          <span>// [03]</span>
+          <h3 class="pf-project__title">SmartMonkey</h3>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
         </div>
-        <h3 class="pf-project__title">SmartMonkey</h3>
         <p class="pf-project__desc">Chrome extension surfacing cross-sell and upsell signals from Twilio customer usage data.</p>
         <div class="pf-project__stats">
           <span>500+ AEs worldwide</span>
